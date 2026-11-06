@@ -352,20 +352,24 @@ const ROLES_OOTB = ["admin","itil","itil_admin","approver_user","catalog_admin",
 
 /* OOTB roles by module (official ServiceNow documentation) */
 const ROLE_MODULES = [
-  {group:"ITSM", items:["itil","incident_manager","major_incident_manager","communication_manager","sn_incident_read","sn_incident_write",
-    "sn_problem_read","sn_problem_write","change_manager","sn_change_admin","sn_change_read","sn_change_write","sn_change_cab.cab_manager",
-    "sn_request_read","sn_request_write","sn_request_comment_write","sn_service_desk_agent",
-    "catalog","catalog_admin","catalog_manager","catalog_editor","catalog_builder_editor","catalog_builder_developer",
-    "knowledge","knowledge_manager","knowledge_admin","knowledge_coach","knowledge_domain_expert","knowledge_group_manager","knowledge_group_member",
-    "kcs_candidate","kcs_contributor","kcs_publisher"]},
-  {group:"HRSD", items:["sn_hr_core.admin","sn_hr_core.profile_reader","delegated_developer"]},
-  {group:"CMDB", items:["cmdb_read","sn_cmdb_editor","sn_cmdb_admin","itil"]},
+  {group:"Licensed / Subscription Roles", items:["itil","itil_admin","approver_user","business_stakeholder"]},
+  {group:"Platform Administration", items:["admin","security_admin","impersonator","user_admin","delegated_developer","web_service_admin","import_admin","rest_api_explorer","snc_internal"]},
+  {group:"ITSM – Incident", items:["incident_manager","major_incident_manager","communication_manager","sn_incident_read","sn_incident_write"]},
+  {group:"ITSM – Problem", items:["problem_manager","problem_coordinator","problem_task_analyst","sn_problem_read","sn_problem_write"]},
+  {group:"ITSM – Change", items:["change_manager","sn_change_admin","sn_change_read","sn_change_write","sn_change_cab.cab_manager"]},
+  {group:"ITSM – Knowledge", items:["knowledge","knowledge_manager","knowledge_admin","knowledge_coach","knowledge_domain_expert","knowledge_group_manager","knowledge_group_member","kcs_candidate","kcs_contributor","kcs_publisher"]},
+  {group:"ITSM – Service Request", items:["sn_request_read","sn_request_write","sn_request_comment_write","catalog","catalog_admin","catalog_manager","catalog_editor","catalog_builder_editor","catalog_builder_developer"]},
+  {group:"HRSD", items:["sn_hr_core.basic","sn_hr_core.admin","sn_hr_core.profile_reader"]},
+  {group:"CMDB", items:["cmdb_read","sn_cmdb_editor","sn_cmdb_admin"]},
+  {group:"Flow Designer / Workflow Studio", items:["flow_designer","flow_admin","flow_operator","flow_designer_scripting","flow_report_viewer","trigger_designer","action_designer","action_category_creator","fd_read"]},
+  {group:"Workspace – Service Operations Workspace (SOW)", items:["sn_sow.sow_user","sn_sow.sow_home","sn_sow.sow_list","sn_sow.it_agent_dashboard_user","sn_sow_itsm_admin.sow_admin_user","sn_sow_admin.sow_admin_center_user","sn_service_desk_agent","awa_agent"]},
+  {group:"Workspace – Agent Workspace", items:["agent_workspace_user","workspace_admin","workspace_list_admin"]},
+  {group:"Workspace – HR Agent Workspace", items:["sn_hr_core.case_reader","sn_hr_core.case_writer"]},
   {group:"Now Assist", items:["sn_nowassist_admin.nsa_admin","sn_nowassist_admin.user","now_assist_panel_user","sn_na_analytics.admin","sn_ace.ace_user","sn_generative_ai.data_steward"]},
   {group:"Platform Analytics", items:["platform_analytics_admin","analytics_admin","dashboard_admin","viz_admin","viz_creator","report_admin",
     "par_scheduler","par_scheduler_admin","analytics_categories_admin","sn_process_optimization_analyst","pa_admin","pa_power_user",
     "pa_data_collector","pa_viewer","pa_contributor","pa_target_admin","pa_threshold_admin","pa_kpi_signal_admin","sn_pa_diagnostics.pa_diagnostic"]}
 ];
-const ROLES_OTHER = ROLES_OOTB.filter(r=>!ROLES_WB.includes(r) && !ROLE_MODULES.some(m=>m.items.includes(r)));
 const TABLES = ["incident","problem","change_request","sc_request","sc_req_item","sc_task","problem_task","change_task","task (parent)"];
 const TABLE_SETTINGS = [
   {id:"field", label:"Add field / change field type, length or flags"},
@@ -487,9 +491,7 @@ function renderDetail(){
       ${descBox("Workbook scenario", (GROUP_SCEN.find(g=>g.id===S.grpScen)||{}).key)}</div>`;
   }
   else if(S.type==="grole"){
-    const roleOpts=[{group:"Specified Roles",items:ROLES_WB.map(r=>({v:r,t:r}))},
-                    ...ROLE_MODULES.map(m=>({group:m.group,items:m.items.map(r=>({v:r,t:r}))})),
-                    {group:"Other Common OOTB Roles",items:ROLES_OTHER.map(r=>({v:r,t:r}))}];
+    const roleOpts=ROLE_MODULES.map(m=>({group:m.group,items:m.items.map(r=>({v:r,t:r}))}));
     h=`<div class="step"><span class="label">Action</span>${pills("roleAction",[{id:"add",label:"Add role"},{id:"remove",label:"Remove role"}],S.roleAction)}</div>
       <div class="step"><div class="grid2">${sel("role","Role (OOTB only)",roleOpts,S.role,"-- Select role --")}</div>
       ${S.role?`<div class="note" style="color:var(--muted)">${ROLES_WB.includes(S.role)?'<span class="tag wb">in workbook</span> This role is referenced in the workbook.':'<span class="tag ext">OOTB (not in workbook)</span> Label only – the workbook has no per-role data, so the matrix is driven by the Add/Remove action.'}</div>`:""}</div>`;
