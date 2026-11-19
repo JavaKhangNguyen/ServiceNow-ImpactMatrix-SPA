@@ -13,7 +13,7 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.45}
-header{display:flex;align-items:center;gap:14px;padding:12px 24px;background:#000;border-bottom:3px solid var(--green);position:sticky;top:0;z-index:5}
+header{display:flex;align-items:center;gap:14px;padding:12px 24px;background:#000;border-bottom:3px solid var(--green);position:sticky;top:0;z-index:50}
 header .brand{display:flex;align-items:center;gap:10px;flex:none;padding-right:16px;border-right:1px solid #2a4a33}
 header .logo-lockup{width:250px;height:auto;display:block}
 header .brand-x{color:#93a39f;font-size:16px}
@@ -106,7 +106,7 @@ th,td{border-bottom-color:#1f3a29}
 table.rt thead th{position:sticky;top:0;z-index:1;background:#0b1d14;border-bottom:1px solid #2a5a3a}
 table.rt tbody tr:hover{background:rgba(98,216,78,.06)}
 table.rt td.n,table.rt th.n{text-align:center;white-space:nowrap}
-table.rt td.why{min-width:280px;color:#cfdbd7}
+table.rt td.why{min-width:240px;color:#cfdbd7}
 .muted{color:var(--muted)}
 .rtb{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:5px;border:1px solid;white-space:nowrap}
 .rt-h{color:#ff7b6b;border-color:#7a2f27;background:rgba(255,90,70,.12)}
@@ -193,6 +193,63 @@ html[data-theme="light"] .btn.sm{background:#ffffff;border-color:#cfe0d5}
 html[data-theme="light"] .empty svg path{stroke:#2e9e3f}
 @media (max-width:600px){.theme-toggle .tt-label{display:none}.theme-toggle{padding:7px 10px}}
 @media (max-width:600px){main{padding:14px}header{padding:10px 14px}header .src{display:none}.section-body{padding:14px}}
+
+/* ---- Cell clipping + "See more" ---- */
+.clip{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;word-break:break-word}
+.see-more{display:inline-block;margin-top:4px;padding:0;border:0;background:none;color:var(--green);font:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.see-more:hover{filter:brightness(1.15)}
+.see-more:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:3px}
+table.rt td.ri{min-width:260px;color:#cfdbd7}
+table.rt td.obj{min-width:130px;word-break:normal}
+table.rt td.det{min-width:130px}
+table.rt td.fam{min-width:96px}
+.ri-b{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;padding:1px 6px;border-radius:4px;border:1px solid;margin-right:6px;vertical-align:1px}
+.ri-gain{color:#62d84e;border-color:#2f6a26;background:rgba(98,216,78,.12)}
+.ri-lose{color:#ff7b6b;border-color:#7a2f27;background:rgba(255,90,70,.12)}
+.ri-none{color:#93a39f;border-color:#34423e;background:rgba(147,163,159,.08)}
+.ri-k{color:var(--muted);font-weight:600}
+/* ---- Right-side drawer (row details) ---- */
+.drw-ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s linear .28s}
+.drw-ov.open{opacity:1;visibility:visible;transition:opacity .28s ease}
+.drw{position:fixed;top:0;right:0;z-index:101;height:100%;width:min(560px,94vw);display:flex;flex-direction:column;background:#07140d;border-left:2px solid #62d84e;box-shadow:-12px 0 40px rgba(0,0,0,.55);transform:translateX(100%);visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s linear .32s}
+.drw.open{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.drw-h{display:flex;align-items:flex-start;gap:12px;padding:16px 20px;border-bottom:1px solid #1f3a29;background:rgba(0,0,0,.35)}
+.drw-h h3{margin:0;font-size:16px;font-weight:600;line-height:1.3}
+.drw-h .sub{color:var(--muted);font-size:12px;margin-top:3px}
+.drw-x{margin-left:auto;flex:none;width:32px;height:32px;display:grid;place-items:center;border-radius:8px;border:1px solid #1f3a29;background:transparent;color:var(--text);font-size:18px;cursor:pointer}
+.drw-x:hover{border-color:var(--green)}
+.drw-x:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.drw-b{flex:1;overflow:auto;padding:18px 20px 28px}
+.drw-sec{margin-bottom:18px}
+.drw-sec:last-child{margin-bottom:0}
+.drw-sec h4{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600}
+.drw-sec p{margin:0;white-space:pre-wrap;word-break:break-word}
+.drw-kv{display:flex;flex-wrap:wrap;gap:8px}
+.drw-list{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.drw-list li{font-size:12px;padding:3px 9px;border-radius:6px;border:1px solid #2a5a3a;background:rgba(98,216,78,.08)}
+.drw-list li span{color:var(--muted)}
+.drw-role{border:1px solid #2a5a3a;border-radius:10px;padding:14px;background:rgba(98,216,78,.05)}
+.drw-role .drw-sec{margin-bottom:12px}
+.drw-hint{font-size:12px;color:var(--warn);margin-top:10px}
+.drw details{margin-top:12px;border-top:1px dashed #2a5a3a;padding-top:10px}
+.drw summary{cursor:pointer;font-size:12px;font-weight:600;color:var(--green)}
+body.drw-lock{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.drw,.drw.open,.drw-ov,.drw-ov.open{transition:none}}
+html[data-theme="light"] table.rt td.ri{color:#2b3d35}
+html[data-theme="light"] .see-more{color:#1f7a2e}
+html[data-theme="light"] .ri-gain{color:#1f7a2e;border-color:#9fd6a8;background:#eaf7ed}
+html[data-theme="light"] .ri-lose{color:#b42318;border-color:#f3b8b0;background:#fdecea}
+html[data-theme="light"] .ri-none{color:#5b6d66;border-color:#d0dad5;background:#f2f5f3}
+html[data-theme="light"] .drw-ov{background:rgba(0,0,0,.45)}
+html[data-theme="light"] .drw{background:#ffffff;border-left-color:#62d84e;box-shadow:-12px 0 40px rgba(20,60,35,.25)}
+html[data-theme="light"] .drw-h{background:linear-gradient(90deg,#f6faf7,#eaf5ee);border-bottom-color:#d5e3da}
+html[data-theme="light"] .drw-x{border-color:#cfe0d5}
+html[data-theme="light"] .drw-list li{border-color:#b9dcc3;background:#eefaf0}
+html[data-theme="light"] .drw-role{border-color:#b9dcc3;background:#f6fbf7}
+html[data-theme="light"] .drw details{border-top-color:#b9dcc3}
+html[data-theme="light"] .drw summary{color:#1f7a2e}
+/* ---- Stacking order: sticky header stays above all page sections (filter z=10, combobox list z=20); drawer (z=100+) stays above header ---- */
+header{z-index:50}
 </style>
 </head>
 <body>
@@ -248,7 +305,13 @@ html[data-theme="light"] .empty svg path{stroke:#2e9e3f}
     <div class="section-body" aria-live="polite" id="resultBody"></div>
   </section>
 </main>
-<footer>Data is embedded from the workbook as-is; no values are altered. Roles marked “OOTB (not in workbook)” are reference labels only.</footer>
+<footer>Data is embedded from the workbook as-is; no values are altered. Roles marked “OOTB (not in workbook)” are not in the workbook; the “Role impact” column uses a built-in OOTB role reference – verify in your instance.</footer>
+<div class="drw-ov" id="drwOv" aria-hidden="true"></div>
+<aside class="drw" id="drw" role="dialog" aria-modal="true" aria-labelledby="drwTitle" aria-hidden="true" tabindex="-1">
+  <div class="drw-h"><div><h3 id="drwTitle">Row details</h3><div class="sub" id="drwSub"></div></div>
+    <button type="button" class="drw-x" id="drwX" aria-label="Close details">✕</button></div>
+  <div class="drw-b" id="drwBody"></div>
+</aside>
 
 <script>
 (function(){
@@ -370,6 +433,196 @@ const ROLE_MODULES = [
     "par_scheduler","par_scheduler_admin","analytics_categories_admin","sn_process_optimization_analyst","pa_admin","pa_power_user",
     "pa_data_collector","pa_viewer","pa_contributor","pa_target_admin","pa_threshold_admin","pa_kpi_signal_admin","sn_pa_diagnostics.pa_diagnostic"]}
 ];
+/* ---- OOTB role scope reference (used by the "Role impact" column).
+   Compiled from ServiceNow OOTB role documentation; access levels are typical OOTB behaviour.
+   Always verify in the target instance: sys_user_role_contains, sys_security_acl_role, sys_app_module.roles. ---- */
+const ACC={R:"read",W:"read/write",C:"create",A:"full / admin",U:"UI access"};
+const RR=(m,t,n,v)=>({m,t:t.map(x=>{const i=x.lastIndexOf(":");return [x.slice(0,i),ACC[x.slice(i+1)]||x.slice(i+1)];}),n:n||"",v:!!v});
+const ROLE_REF={
+  /* Licensed / Subscription */
+  "itil":RR(["Incident","Problem","Change","Service Catalog – Requests / Requested Items / Catalog Tasks","Knowledge (read)","Configuration / CMDB (read)"],
+    ["incident:W","incident_task:W","problem:W","problem_task:W","change_request:W","change_task:W","sc_request:W","sc_req_item:W","sc_task:W","task_ci:W","task_sla:R","sysapproval_approver:R","kb_knowledge:R","cmdb_ci:R","sys_user_group:R"],
+    "Core fulfiller role. Most ITSM navigator modules and task-table ACLs check itil."),
+  "itil_admin":RR(["Incident (admin)","Problem (admin)","Change (admin)","Service Catalog – Requests (admin)","Incident / Problem / Change properties"],
+    ["incident:A","incident_task:A","problem:A","problem_task:A","change_request:A","change_task:A","sc_request:A","sc_req_item:A","sc_task:A","task_sla:W","task_ci:W"],
+    "Fulfiller role with extra delete / admin rights on ITSM task tables; typically contains itil."),
+  "approver_user":RR(["Self-Service – My Approvals","Service Portal / Employee Center – Approvals"],
+    ["sysapproval_approver:W","sysapproval_group:R","change_request:R","sc_request:R","sc_req_item:R"],
+    "Licensed approver: approve/reject and read the record being approved, without fulfiller rights."),
+  "business_stakeholder":RR(["Self-Service – My Approvals","Reports / Dashboards (read)"],
+    ["sysapproval_approver:W","task:R","sys_report:R","par_dashboard:R"],
+    "Licensed stakeholder: approvals plus read access to task records and reporting."),
+  /* Platform Administration */
+  "admin":RR(["All application menus and modules"],["* (all tables):A"],
+    "Passes almost every ACL; only elevated (security_admin) and explicitly restricted areas are excluded."),
+  "security_admin":RR(["System Security – Access Control (ACL)","System Security – High Security Settings"],
+    ["sys_security_acl:W","sys_security_acl_role:W","sys_properties (security):W"],"Elevated role; must be elevated per session to edit ACLs."),
+  "impersonator":RR(["Impersonate User (banner / user menu)"],["sys_user:R"],"Allows impersonating other (non-admin) users."),
+  "user_admin":RR(["User Administration – Users, Groups, Roles"],
+    ["sys_user:W","sys_user_group:W","sys_user_grmember:W","sys_user_has_role:W","sys_group_has_role:W","sys_user_delegate:W"],
+    "Maintains users, groups, memberships and role grants."),
+  "delegated_developer":RR(["Studio / App Engine Studio (assigned scoped apps)"],["sys_metadata (scoped app):W","sys_update_set:W"],
+    "Developer rights limited to the delegated application scope(s)."),
+  "web_service_admin":RR(["System Web Services – REST / SOAP"],["sys_rest_message:W","sys_ws_definition:W","sys_ws_operation:W","sys_soap_message:W"],
+    "Maintains inbound and outbound web service definitions."),
+  "import_admin":RR(["System Import Sets – Data Sources, Transform Maps, Import Sets"],
+    ["sys_data_source:W","sys_import_set:W","sys_import_set_row:W","sys_transform_map:W","sys_transform_entry:W"],"Maintains and runs imports and transforms."),
+  "rest_api_explorer":RR(["System Web Services – REST API Explorer"],["(no table rights – UI tool only):U"],
+    "Opens REST API Explorer; calls still run with the user's own table ACLs."),
+  "snc_internal":RR(["Self-Service","Service Portal / Employee Center"],["incident:C","sc_request:C","sc_req_item:C","kb_knowledge:R"],
+    "Baseline internal-user role (explicit roles model); access is limited to own records and user-criteria-scoped content."),
+  /* ITSM – Incident */
+  "incident_manager":RR(["Incident","Incident – Major Incidents (view)","Incident Communication"],["incident:W","incident_task:W","incident_alert:W"],
+    "Incident process manager rights."),
+  "major_incident_manager":RR(["Major Incident Management – Workbench","Incident – Major Incident Candidates"],
+    ["incident:W","incident_task:W","incident_alert:W","comm_plan:W"],"Propose / promote / accept / reject major incident candidates."),
+  "communication_manager":RR(["Incident Communication Management – Communication Plans / Tasks"],["comm_plan:W","comm_task:W","comm_channel:W"],
+    "Runs stakeholder communication plans for (major) incidents."),
+  "sn_incident_read":RR(["Incident (read-only)"],["incident:R","incident_task:R"],"Granular read role for incident."),
+  "sn_incident_write":RR(["Incident"],["incident:W","incident_task:W"],"Granular write role for incident."),
+  /* ITSM – Problem */
+  "problem_manager":RR(["Problem","Problem – Known Errors","Problem Tasks"],["problem:W","problem_task:W","kb_knowledge (known error):W"],"Problem process manager rights."),
+  "problem_coordinator":RR(["Problem","Problem Tasks"],["problem:W","problem_task:W"],"Coordinates problem investigation and RCA."),
+  "problem_task_analyst":RR(["Problem Tasks"],["problem_task:W","problem:R"],"Works assigned problem tasks."),
+  "sn_problem_read":RR(["Problem (read-only)"],["problem:R","problem_task:R"],"Granular read role for problem."),
+  "sn_problem_write":RR(["Problem"],["problem:W","problem_task:W"],"Granular write role for problem."),
+  /* ITSM – Change */
+  "change_manager":RR(["Change","Change – CAB Workbench","Change Schedules / Blackout & Maintenance Schedules","Standard Change Catalog – Proposals"],
+    ["change_request:W","change_task:W","std_change_proposal:W","cmn_schedule_blackout:W","cmn_schedule_maintenance:W"],"Change process manager rights."),
+  "sn_change_admin":RR(["Change – Administration (Change Models, Approval Policies, Properties)"],
+    ["change_request:A","change_task:A","chg_model:W","sys_decision (approval policies):W"],"Administers change configuration."),
+  "sn_change_read":RR(["Change (read-only)"],["change_request:R","change_task:R"],"Granular read role for change."),
+  "sn_change_write":RR(["Change"],["change_request:W","change_task:W"],"Granular write role for change."),
+  "sn_change_cab.cab_manager":RR(["CAB Workbench – CAB Definitions / Meetings"],["cab_definition:W","cab_meeting:W","cab_agenda_item:W","change_request:R"],
+    "Plans and runs CAB meetings."),
+  /* ITSM – Knowledge */
+  "knowledge":RR(["Knowledge – Homepage / Create & edit articles"],["kb_knowledge:W","kb_feedback:W"],"Contribute rights still filtered by KB user criteria."),
+  "knowledge_manager":RR(["Knowledge – Manage KB, Approvals, Feedback"],["kb_knowledge:W","kb_knowledge_base (managed):W","kb_category:W","kb_feedback_task:W"],
+    "Manages the knowledge bases they are manager of."),
+  "knowledge_admin":RR(["Knowledge – Administration (all KBs, properties)"],["kb_knowledge:A","kb_knowledge_base:A","kb_category:A","kb_feedback_task:W"],
+    "Full knowledge administration."),
+  "knowledge_coach":RR(["Knowledge – KCS coaching / article quality"],["kb_knowledge:W","kb_feedback_task:W"],"KCS coach.",true),
+  "knowledge_domain_expert":RR(["Knowledge – Feedback / flagged articles"],["kb_knowledge:W","kb_feedback_task:W"],"Subject-matter expert reviewing feedback.",true),
+  "knowledge_group_manager":RR(["Knowledge – Group-owned KBs"],["kb_knowledge:W","kb_knowledge_base (group):W"],"Manages group-owned knowledge.",true),
+  "knowledge_group_member":RR(["Knowledge – Group-owned KBs"],["kb_knowledge:W"],"Contributes to group-owned knowledge.",true),
+  "kcs_candidate":RR(["Knowledge – KCS (work-in-progress articles)"],["kb_knowledge:C"],"KCS level: create / edit own WIP articles.",true),
+  "kcs_contributor":RR(["Knowledge – KCS (publish internal)"],["kb_knowledge:W"],"KCS level: publish and edit internal articles.",true),
+  "kcs_publisher":RR(["Knowledge – KCS (publish external)"],["kb_knowledge:W"],"KCS level: publish to external audiences.",true),
+  /* ITSM – Service Request */
+  "sn_request_read":RR(["Service Catalog – Requests (read-only)"],["sc_request:R","sc_req_item:R","sc_task:R"],"Granular read role for requests."),
+  "sn_request_write":RR(["Service Catalog – Requests"],["sc_request:W","sc_req_item:W","sc_task:W"],"Granular write role for requests."),
+  "sn_request_comment_write":RR(["Service Catalog – Requests (comments)"],["sc_request (comments):W","sc_req_item (comments):W"],"Add comments only."),
+  "catalog":RR(["Service Catalog – Browse & order"],["sc_cat_item:R","sc_cart:W"],"Order from the catalog."),
+  "catalog_admin":RR(["Service Catalog – Maintain Catalogs, Categories, Items, Variables, Record Producers"],
+    ["sc_catalog:A","sc_category:A","sc_cat_item:A","sc_cat_item_producer:A","item_option_new:A","catalog_ui_policy:A","catalog_script_client:A"],"Full catalog administration."),
+  "catalog_manager":RR(["Service Catalog – Manage owned catalogs"],["sc_catalog (managed):W","sc_category:W","sc_cat_item:W"],"Manages catalogs they own."),
+  "catalog_editor":RR(["Service Catalog – Edit items / variables"],["sc_cat_item:W","item_option_new:W","sc_category:R"],"Edits catalog items in catalogs they are editor of."),
+  "catalog_builder_editor":RR(["Catalog Builder"],["sc_cat_item (via Catalog Builder):W","item_option_new:W"],"Builds items from Catalog Builder templates.",true),
+  "catalog_builder_developer":RR(["Catalog Builder – templates"],["sc_cat_item (via Catalog Builder):W","item_option_new:W"],"Catalog Builder template / developer rights.",true),
+  /* HRSD */
+  "sn_hr_core.basic":RR(["HR Service Delivery – basic HR access"],["sn_hr_core_case (assigned):R","sn_hr_core_profile:R"],"Basic HR fulfiller access."),
+  "sn_hr_core.admin":RR(["HR Administration – COEs, Services, Templates"],["sn_hr_core_case:A","sn_hr_core_service:A","sn_hr_core_profile:A"],"Full HR administration."),
+  "sn_hr_core.profile_reader":RR(["HR Profiles (read)"],["sn_hr_core_profile:R"],"Read HR profiles."),
+  /* CMDB */
+  "cmdb_read":RR(["Configuration – CI lists (read)","CI Class Manager (read)"],["cmdb_ci:R","cmdb_rel_ci:R","task_ci:R"],"Read CMDB."),
+  "sn_cmdb_editor":RR(["Configuration – CI lists"],["cmdb_ci:W","cmdb_rel_ci:W","task_ci:R"],"Edit CIs and relationships."),
+  "sn_cmdb_admin":RR(["Configuration – CI Class Manager, Identification & Reconciliation"],["cmdb_ci:A","cmdb_rel_ci:A","cmdb_identifier:W"],"CMDB administration."),
+  /* Flow Designer / Workflow Studio */
+  "flow_designer":RR(["Workflow Studio / Flow Designer – Flows & Subflows"],["sys_hub_flow:W","sys_hub_action_type_definition:R"],"Build flows and subflows."),
+  "flow_admin":RR(["Workflow Studio / Flow Designer – Administration"],["sys_hub_flow:A","sys_hub_action_type_definition:A","sys_flow_context:W"],"Full Flow Designer administration."),
+  "flow_operator":RR(["Flow Designer – Executions / Operations"],["sys_flow_context:R"],"Monitor flow executions."),
+  "flow_designer_scripting":RR(["Flow Designer – inline scripts"],["sys_hub_flow (script steps):W"],"Allows inline scripts in flows / actions.",true),
+  "flow_report_viewer":RR(["Flow Designer – Execution reports"],["sys_flow_context:R"],"View flow execution details.",true),
+  "trigger_designer":RR(["Workflow Studio – Trigger designer"],["sys_hub_trigger_definition:W"],"Design custom flow triggers.",true),
+  "action_designer":RR(["Workflow Studio – Action Designer"],["sys_hub_action_type_definition:W"],"Build custom actions."),
+  "action_category_creator":RR(["Workflow Studio – Action categories"],["sys_hub_category:W"],"Create action categories.",true),
+  "fd_read":RR(["Workflow Studio / Flow Designer (read-only)"],["sys_hub_flow:R"],"Read-only access to flows."),
+  /* Service Operations Workspace */
+  "sn_sow.sow_user":RR(["Service Operations Workspace"],["(workspace UI only – record access comes from itil / granular roles):U"],"Opens SOW; does not grant table rights."),
+  "sn_sow.sow_home":RR(["Service Operations Workspace – Home"],["(workspace UI only):U"],"SOW home page.",true),
+  "sn_sow.sow_list":RR(["Service Operations Workspace – Lists"],["(workspace UI only):U"],"SOW list page.",true),
+  "sn_sow.it_agent_dashboard_user":RR(["Service Operations Workspace – IT agent dashboard"],["(workspace UI only):U"],"SOW agent dashboard.",true),
+  "sn_sow_itsm_admin.sow_admin_user":RR(["Service Operations Workspace – ITSM admin configuration"],["(workspace configuration):U"],"SOW ITSM configuration.",true),
+  "sn_sow_admin.sow_admin_center_user":RR(["Service Operations Workspace – Admin Center"],["(workspace configuration):U"],"SOW admin center.",true),
+  "sn_service_desk_agent":RR(["Service Operations Workspace – Service desk agent experience"],["(workspace UI only):U"],"Service desk agent experience.",true),
+  "awa_agent":RR(["Advanced Work Assignment – Agent Inbox"],["awa_work_item:W","awa_agent_presence:W"],"Receives work through AWA queues."),
+  /* Agent Workspace */
+  "agent_workspace_user":RR(["Agent Workspace"],["(workspace UI only):U"],"Opens Agent Workspace; table rights come from other roles."),
+  "workspace_admin":RR(["Workspace configuration (UX)"],["sys_ux_* (workspace config):W"],"Configures workspaces.",true),
+  "workspace_list_admin":RR(["Workspace – List configuration"],["sys_aw_list:W"],"Configures workspace lists.",true),
+  /* HR Agent Workspace */
+  "sn_hr_core.case_reader":RR(["HR Agent Workspace – HR Cases (read)"],["sn_hr_core_case:R"],"Read HR cases."),
+  "sn_hr_core.case_writer":RR(["HR Agent Workspace – HR Cases"],["sn_hr_core_case:W"],"Work HR cases."),
+  /* Now Assist */
+  "sn_nowassist_admin.nsa_admin":RR(["Now Assist Admin console – skills & settings"],["(Now Assist configuration):W"],"Enable / configure Now Assist skills.",true),
+  "sn_nowassist_admin.user":RR(["Now Assist Admin console (view)"],["(Now Assist configuration):R"],"View Now Assist admin console.",true),
+  "now_assist_panel_user":RR(["Now Assist panel"],["(UI only):U"],"Use the Now Assist panel.",true),
+  "sn_na_analytics.admin":RR(["Now Assist – Analytics"],["(Now Assist analytics):R"],"Now Assist usage analytics.",true),
+  "sn_ace.ace_user":RR(["Now Assist – related experience"],["(UI only):U"],"Scope not documented in the workbook – verify in instance.",true),
+  "sn_generative_ai.data_steward":RR(["Generative AI Controller – data privacy settings"],["(Generative AI data settings):W"],"Governs data used by generative AI.",true),
+  /* Platform Analytics */
+  "platform_analytics_admin":RR(["Platform Analytics – Administration"],["par_dashboard:A","sys_report:A","pa_indicators:A","par_visualization:A"],"Full Platform Analytics administration."),
+  "analytics_admin":RR(["Platform Analytics – Administration"],["par_dashboard:A","sys_report:A","pa_indicators:A"],"Analytics administration.",true),
+  "dashboard_admin":RR(["Platform Analytics – Dashboards"],["par_dashboard:A"],"Administer dashboards."),
+  "viz_admin":RR(["Platform Analytics – Visualizations"],["par_visualization:A"],"Administer visualizations.",true),
+  "viz_creator":RR(["Platform Analytics – Visualizations"],["par_visualization:W"],"Create visualizations.",true),
+  "report_admin":RR(["Reports – Administration"],["sys_report:A","sys_report_source:W"],"Administer all reports."),
+  "par_scheduler":RR(["Platform Analytics – Scheduled exports"],["par_schedule:W"],"Schedule dashboard / report exports.",true),
+  "par_scheduler_admin":RR(["Platform Analytics – Scheduled exports (admin)"],["par_schedule:A"],"Administer scheduled exports.",true),
+  "analytics_categories_admin":RR(["Platform Analytics – Categories"],["(analytics categories):W"],"Maintain analytics categories.",true),
+  "sn_process_optimization_analyst":RR(["Process Mining / Process Optimization"],["(process mining projects):W"],"Analyse process mining projects.",true),
+  "pa_admin":RR(["Performance Analytics – Administration"],["pa_indicators:A","pa_breakdowns:A","pa_cubes:A","sysauto_pa:A","pa_targets:A","pa_thresholds:A"],"Full PA administration."),
+  "pa_power_user":RR(["Performance Analytics – Indicators, Breakdowns"],["pa_indicators:W","pa_breakdowns:W","pa_cubes:W"],"Build PA content."),
+  "pa_data_collector":RR(["Performance Analytics – Data Collector jobs"],["sysauto_pa:W","pa_job_logs:R"],"Run PA data collection."),
+  "pa_viewer":RR(["Performance Analytics – Scorecards / Analytics Hub (view)"],["pa_indicators:R","pa_scores:R"],"View PA scores."),
+  "pa_contributor":RR(["Performance Analytics – Scorecards (comments / targets)"],["pa_indicators:R","pa_scores:R"],"Contribute to PA content.",true),
+  "pa_target_admin":RR(["Performance Analytics – Targets"],["pa_targets:W"],"Maintain PA targets."),
+  "pa_threshold_admin":RR(["Performance Analytics – Thresholds"],["pa_thresholds:W"],"Maintain PA thresholds."),
+  "pa_kpi_signal_admin":RR(["Performance Analytics – KPI Signals"],["(KPI signal definitions):W"],"Maintain KPI signals.",true),
+  "sn_pa_diagnostics.pa_diagnostic":RR(["Performance Analytics – Diagnostics"],["(PA diagnostics):R"],"Run PA diagnostics.",true)
+};
+const TASK_FAMILY=["task","incident","incident_task","problem","problem_task","change_request","change_task","sc_request","sc_req_item","sc_task"];
+const TBL_KW={incident:/incident/i,incident_task:/incident/i,incident_alert:/incident/i,problem:/problem/i,problem_task:/problem/i,change_request:/change/i,change_task:/change/i,
+  sc_request:/catalog|request/i,sc_req_item:/catalog|request/i,sc_task:/catalog|request/i,task_sla:/sla/i,contract_sla:/sla/i,sysapproval_approver:/approv/i,sysapproval_group:/approv/i,
+  kb_knowledge:/knowledge/i,sys_user_delegate:/user admin/i,task_ci:/cmdb|configuration/i,cmdb_ci:/cmdb|configuration/i};
+const RI_KIND=[
+  [/ACL/i,"acl"],[/Group roles|membership/i,"member"],[/Business rules|Script includes|Client scripts|UI policies|UI actions|Scheduled jobs|email scripts|widgets|Decision tables|System properties/i,"script"],
+  [/Flows|workflows/i,"flow"],[/Notifications/i,"notif"],[/Reports|dashboards|Saved filters|modules/i,"report"],
+  [/Assignment rules|data lookups|On-call|Work Assignment|Group hierarchy/i,"route"],[/Transform|Scripted REST|External systems|Record producers|Inbound email/i,"integ"]];
+const RI_TXT={
+  acl:{add:"ACLs that require this role start granting access to group members on the tables below.",remove:"ACLs that require this role stop granting access to group members on the tables below (unless the role is still held via another group or direct grant)."},
+  member:{add:"The role is granted to every group member through sys_group_has_role → inherited sys_user_has_role rows.",remove:"Inherited sys_user_has_role rows are removed from every group member; they lose the scope below."},
+  script:{add:"Logic that checks gs.hasRole / g_user.hasRole for this role (conditions, scripts, UI action visibility) now evaluates true for group members.",remove:"Logic that checks gs.hasRole / g_user.hasRole for this role now evaluates false for group members – buttons, fields and script branches change."},
+  flow:{add:"Flows that run as the user, or resolve approvers / assignees by role, now include group members for the tables below.",remove:"Flows that run as the user, or resolve approvers / assignees by role, no longer include group members – run-as steps on the tables below can fail."},
+  notif:{add:"Role-targeted notifications now reach group members; record content they can read follows the scope below.",remove:"Role-targeted notifications no longer reach group members; links in mails open records they may no longer read."},
+  report:{add:"Navigator modules, reports and dashboards restricted to this role become visible; row counts follow the table access below.",remove:"Navigator modules, reports and dashboards restricted to this role disappear; reports return fewer rows on the tables below."},
+  route:{add:"Members can work records routed to the group on the tables below.",remove:"Records are still routed to the group, but members lose the rights needed to work them on the tables below."},
+  integ:{add:"Integration / service accounts in the group gain API access on the tables below.",remove:"Integration / service accounts in the group lose API access on the tables below – calls return 401/403 or empty results."}
+};
+function roleImpact(row,ctx){
+  const ref=ROLE_REF[ctx.role]; const add=ctx.action==="add";
+  if(!ref) return {v:"none",msg:"No OOTB reference data for this role.",tables:[],mods:[],note:"",ver:false};
+  const text=row.obj+" "+row.det;
+  let toks=(text.match(/[a-z][a-z0-9_]*/g)||[]);
+  if(/\btask and children\b/i.test(text)) toks=toks.concat(TASK_FAMILY);
+  const all=ref.t[0]&&ref.t[0][0].startsWith("*");
+  const kind=(RI_KIND.find(k=>k[0].test(row.obj))||[])[1];
+  let tables, mods, msg;
+  if(kind){
+    tables=ref.t; mods=ref.m; msg=RI_TXT[kind][add?"add":"remove"];
+  }else{
+    const hit=[...new Set(toks.filter(t=>TBL_KW[t]))];
+    tables=all?[[hit.length?"All tables incl. "+hit.join(", "):ref.t[0][0],ref.t[0][1]]]
+              :ref.t.filter(t=>{const base=t[0].split(" ")[0];return toks.includes(base);});
+    const kws=[...new Set(toks.filter(t=>TBL_KW[t]).map(t=>TBL_KW[t]))];
+    mods=all?ref.m:ref.m.filter(m=>kws.some(k=>k.test(m)));
+    if(!tables.length && !mods.length) return {v:"none",msg:"No direct access change on this object from "+ctx.role+".",tables:[],mods:[],note:ref.n,ver:ref.v};
+    msg=add?"Group members gain the access below on this object.":"Group members lose the access below on this object (unless still granted via another group / direct role).";
+  }
+  return {v:add?"gain":"lose",msg,tables,mods,note:ref.n,ver:ref.v};
+}
+const riPlain=ri=>[ri.msg,ri.tables.map(t=>t[0]+" ("+t[1]+")").join(", "),ri.mods.join(", ")].join(" ");
+
 const TABLES = ["incident","problem","change_request","sc_request","sc_req_item","sc_task","problem_task","change_task","task (parent)"];
 const TABLE_SETTINGS = [
   {id:"field", label:"Add field / change field type, length or flags"},
@@ -494,7 +747,7 @@ function renderDetail(){
     const roleOpts=ROLE_MODULES.map(m=>({group:m.group,items:m.items.map(r=>({v:r,t:r}))}));
     h=`<div class="step"><span class="label">Action</span>${pills("roleAction",[{id:"add",label:"Add role"},{id:"remove",label:"Remove role"}],S.roleAction)}</div>
       <div class="step"><div class="grid2">${sel("role","Role (OOTB only)",roleOpts,S.role,"-- Select role --")}</div>
-      ${S.role?`<div class="note" style="color:var(--muted)">${ROLES_WB.includes(S.role)?'<span class="tag wb">in workbook</span> This role is referenced in the workbook.':'<span class="tag ext">OOTB (not in workbook)</span> Label only – the workbook has no per-role data, so the matrix is driven by the Add/Remove action.'}</div>`:""}</div>`;
+      ${S.role?`<div class="note" style="color:var(--muted)">${ROLES_WB.includes(S.role)?'<span class="tag wb">in workbook</span> This role is referenced in the workbook.':'<span class="tag ext">OOTB (not in workbook)</span> The workbook has no per-role data; the matrix is driven by the Add/Remove action and the Role impact column uses the built-in OOTB role reference.'}</div>`:""}</div>`;
   }
   else if(S.type==="process"){
     const scen = S.module? Object.keys(SCEN[S.module]):[];
@@ -551,7 +804,7 @@ function resolve(){
   return {chips,src};
 }
 
-const R = {rows:[], page:1, rating:"ALL", q:"", sig:""};
+const R = {rows:[], page:1, rating:"ALL", q:"", sig:"", ctx:null, view:[]};
 const PAGE=20;
 const RATING_ORDER=["HIGH","MEDIUM","LOW","N/A"];
 function buildRows(src){
@@ -561,11 +814,12 @@ function buildRows(src){
     else if(x.sheet==="Dependency Register") (WB.DEP[x.key]||[]).forEach(r=>out.push({sheet:x.sheet,key:x.key,fam:r[0],obj:r[1],det:r[2],L:r[3],I:r[4],sc:r[5],rt:r[6],why:r[7]}));
     else if(x.sheet==="Group Impact Register") (WB.GRP[x.key]||[]).forEach(r=>out.push({sheet:x.sheet,key:x.key,fam:r[0],obj:r[1],det:r[2],L:r[3],I:r[4],sc:r[5],rt:r[6],why:r[7]}));
   });
+  if(R.ctx) out.forEach(r=>{r.ri=roleImpact(r,R.ctx);r.riTxt=riPlain(r.ri);});
   return out;
 }
 function filtered(){
   const q=R.q.trim().toLowerCase();
-  return R.rows.filter(r=>(R.rating==="ALL"||r.rt===R.rating)&&(!q||[r.fam,r.obj,r.det,r.why,r.key].join(" ").toLowerCase().includes(q)));
+  return R.rows.filter(r=>(R.rating==="ALL"||r.rt===R.rating)&&(!q||[r.fam,r.obj,r.det,r.why,r.key,r.riTxt||""].join(" ").toLowerCase().includes(q)));
 }
 const rtCls=v=>({"HIGH":"rt-h","MEDIUM":"rt-m","LOW":"rt-l","N/A":"rt-n"}[v]||"rt-n");
 function renderResult(){
@@ -576,7 +830,8 @@ function renderResult(){
     return;
   }
   st.textContent="Ready"; st.className="status ok";
-  const sig=JSON.stringify(r.src);
+  R.ctx=(S.type==="grole"&&S.role&&S.roleAction)?{role:S.role,action:S.roleAction}:null;
+  const sig=JSON.stringify([r.src,R.ctx]);
   if(sig!==R.sig){R.sig=sig;R.rows=buildRows(r.src);R.page=1;R.rating="ALL";R.q="";}
   const cnt={}; R.rows.forEach(x=>cnt[x.rt]=(cnt[x.rt]||0)+1);
   const rts=["ALL",...RATING_ORDER.filter(k=>cnt[k])];
@@ -588,10 +843,10 @@ function renderResult(){
       ${r.src.map(x=>`<span class="chip src-chip" title="${esc(x.key)}"><span>${esc(x.sheet)}:</span> ${esc(x.key)}</span>`).join("")}</div>
     <div class="toolbar">
       <div class="pills" role="radiogroup" aria-label="Filter by rating">${rts.map(k=>`<button type="button" class="pill rf${R.rating===k?" active":""}" data-rt="${k}" role="radio" aria-checked="${R.rating===k}">${k==="ALL"?"All":k} <span class="cnt">${k==="ALL"?R.rows.length:cnt[k]}</span></button>`).join("")}</div>
-      <label class="search"><span class="sr">Search results</span><input type="search" id="rq" placeholder="Search object, family, guidance…" value="${esc(R.q)}"></label>
+      <label class="search"><span class="sr">Search results</span><input type="search" id="rq" placeholder="Search object, family, guidance${R.ctx?", role impact":""}…" value="${esc(R.q)}"></label>
     </div>
     <div class="tbl-wrap" id="tblWrap"><table class="rt">
-      <thead><tr><th>#</th>${multi?"<th>Source</th>":""}<th>Object family</th><th>Object</th>${hasDet?"<th>Mechanism / tables</th>":""}<th>${hasScore?"Rating":"Impact"}</th><th>Why / what to check</th></tr></thead>
+      <thead><tr><th>#</th>${multi?"<th>Source</th>":""}<th>Object family</th><th>Object</th>${hasDet?"<th>Mechanism / tables</th>":""}<th>${hasScore?"Rating":"Impact"}</th><th>Why / what to check</th>${R.ctx?`<th>Role impact – ${R.ctx.action==="add"?"add":"remove"} <code>${esc(R.ctx.role)}</code> (tables &amp; modules)</th>`:""}</tr></thead>
       <tbody id="rtBody"></tbody></table></div>
     <div class="pager" id="pager"></div>`;
   renderRows(multi,hasDet,hasScore);
@@ -601,13 +856,15 @@ function renderRows(multi,hasDet,hasScore){
   const list=filtered(); const pages=Math.max(1,Math.ceil(list.length/PAGE));
   R.page=Math.min(Math.max(1,R.page),pages);
   const start=(R.page-1)*PAGE, slice=list.slice(start,start+PAGE);
-  const cols=5+(multi?1:0)+(hasDet?1:0)+0;
-  $("rtBody").innerHTML = slice.length? slice.map((x,i)=>`<tr>
+  const cols=5+(multi?1:0)+(hasDet?1:0)+(R.ctx?1:0);
+  R.view=slice;
+  $("rtBody").innerHTML = slice.length? slice.map((x,i)=>`<tr data-i="${i}">
     <td class="n muted">${start+i+1}</td>
-    ${multi?`<td><span class="srcb">${esc(x.sheet==="Detailed Reference"?"Config objects":x.sheet==="Dependency Register"?"Related tables":"Group register")}</span></td>`:""}
-    <td class="muted">${esc(x.fam)}</td><td><b>${esc(x.obj)}</b></td>
-    ${hasDet?`<td class="muted">${esc(x.det)||"—"}</td>`:""}
-    <td><span class="rtb ${rtCls(x.rt)}">${esc(x.rt)}</span></td><td class="why">${esc(x.why)}</td></tr>`).join("")
+    ${multi?`<td><span class="srcb">${esc(srcLabel(x))}</span></td>`:""}
+    <td class="muted fam">${esc(x.fam)}</td><td class="obj"><div class="clip"><b>${esc(x.obj)}</b></div></td>
+    ${hasDet?`<td class="muted det"><div class="clip">${esc(x.det)||"—"}</div></td>`:""}
+    <td><span class="rtb ${rtCls(x.rt)}">${esc(x.rt)}</span></td><td class="why"><div class="clip">${esc(x.why)}</div></td>
+    ${R.ctx?`<td class="ri"><div class="clip">${riCell(x.ri)}</div></td>`:""}</tr>`).join("")
     : `<tr><td colspan="${cols}" class="empty">No rows match the current rating filter / search.</td></tr>`;
   const from=list.length?start+1:0, to=start+slice.length;
   let nums=[]; for(let p=1;p<=pages;p++){ if(p===1||p===pages||Math.abs(p-R.page)<=1) nums.push(p); else if(nums[nums.length-1]!=="…") nums.push("…"); }
@@ -618,8 +875,81 @@ function renderRows(multi,hasDet,hasScore){
       <button type="button" class="btn sm" data-pg="${R.page+1}" ${R.page>=pages?"disabled":""} aria-label="Next page">Next ›</button>
     </div>`;
   const w=$("tblWrap"); if(w) w.scrollTop=0;
+  markOverflow();
 }
+const srcLabel=x=>x.sheet==="Detailed Reference"?"Config objects":x.sheet==="Dependency Register"?"Related tables":"Group register";
+const riBadge=v=>`<span class="ri-b ri-${v}">${v==="gain"?"GAINS":v==="lose"?"LOSES":"NO CHANGE"}</span>`;
+function riCell(ri){
+  if(!ri) return "—";
+  let h=riBadge(ri.v)+esc(ri.msg);
+  if(ri.tables.length) h+=`<br><span class="ri-k">Tables:</span> ${ri.tables.map(t=>esc(t[0])+" ("+esc(t[1])+")").join(", ")}`;
+  if(ri.mods.length) h+=`<br><span class="ri-k">Modules:</span> ${ri.mods.map(esc).join(", ")}`;
+  return h;
+}
+/* Add a "See more" link to every clipped cell whose content does not fit */
+function markOverflow(){
+  const body=$("rtBody"); if(!body) return;
+  requestAnimationFrame(()=>{
+    body.querySelectorAll(".see-more").forEach(b=>b.remove());
+    body.querySelectorAll(".clip").forEach(c=>{
+      if(c.scrollHeight>c.clientHeight+1){
+        const b=document.createElement("button"); b.type="button"; b.className="see-more"; b.textContent="See more";
+        b.setAttribute("aria-label","See more – open full row details"); c.after(b);
+      }
+    });
+  });
+}
+let moT=null; window.addEventListener("resize",()=>{clearTimeout(moT);moT=setTimeout(markOverflow,120);});
+/* ---- Right-side drawer ---- */
+const DRW={el:$("drw"),ov:$("drwOv"),last:null};
+const dSec=(t,body)=>body?`<div class="drw-sec"><h4>${esc(t)}</h4>${body}</div>`:"";
+const dList=items=>items.length?`<ul class="drw-list">${items.join("")}</ul>`:`<p class="muted">None</p>`;
+function openDrawer(x,trigger){
+  if(!x) return;
+  $("drwTitle").textContent=x.obj;
+  $("drwSub").textContent=[x.fam,srcLabel(x)].filter(Boolean).join(" · ");
+  let h=dSec("Rating",`<div class="drw-kv"><span class="rtb ${rtCls(x.rt)}">${esc(x.rt)}</span>${x.sc!==""?`<span class="chip"><span>Likelihood:</span> ${esc(x.L)}</span><span class="chip"><span>Impact:</span> ${esc(x.I)}</span><span class="chip"><span>Score:</span> ${esc(x.sc)}</span>`:""}</div>`);
+  if(x.det) h+=dSec("Mechanism / tables",`<p>${esc(x.det)}</p>`);
+  h+=dSec("Why / what to check",`<p>${esc(x.why)}</p>`);
+  h+=dSec("Workbook source",`<p>${esc(x.sheet)} › ${esc(x.key)}</p>`);
+  if(x.ri&&R.ctx){
+    const ri=x.ri, ref=ROLE_REF[R.ctx.role];
+    h+=`<div class="drw-role"><div class="drw-sec"><h4>Role impact – ${R.ctx.action==="add"?"Add":"Remove"} role <code>${esc(R.ctx.role)}</code></h4><p>${riBadge(ri.v)}${esc(ri.msg)}</p></div>
+      ${dSec("Tables affected ("+ri.tables.length+")",dList(ri.tables.map(t=>`<li>${esc(t[0])} <span>· ${esc(t[1])}</span></li>`)))}
+      ${dSec("Modules affected ("+ri.mods.length+")",dList(ri.mods.map(m=>`<li>${esc(m)}</li>`)))}
+      ${ri.note?dSec("Role note",`<p>${esc(ri.note)}</p>`):""}
+      ${ref?`<details><summary>Full OOTB scope of ${esc(R.ctx.role)} (${ref.t.length} tables · ${ref.m.length} modules)</summary>
+        <div style="margin-top:10px">${dSec("All tables",dList(ref.t.map(t=>`<li>${esc(t[0])} <span>· ${esc(t[1])}</span></li>`)))}${dSec("All modules",dList(ref.m.map(m=>`<li>${esc(m)}</li>`)))}</div></details>`:""}
+      <div class="drw-hint">${ri.ver?"⚠ Reference scope for this role is indicative – ":""}Verify in your instance: sys_user_role_contains, sys_security_acl_role and sys_app_module (Roles).</div></div>`;
+  }
+  $("drwBody").innerHTML=h; $("drwBody").scrollTop=0;
+  DRW.last=trigger||document.activeElement;
+  DRW.ov.classList.add("open"); DRW.el.classList.add("open");
+  DRW.ov.setAttribute("aria-hidden","false"); DRW.el.setAttribute("aria-hidden","false");
+  document.body.classList.add("drw-lock");
+  setTimeout(()=>$("drwX").focus(),30);
+}
+function closeDrawer(){
+  if(!DRW.el.classList.contains("open")) return;
+  DRW.ov.classList.remove("open"); DRW.el.classList.remove("open");
+  DRW.ov.setAttribute("aria-hidden","true"); DRW.el.setAttribute("aria-hidden","true");
+  document.body.classList.remove("drw-lock");
+  if(DRW.last&&document.contains(DRW.last)) DRW.last.focus();
+}
+DRW.ov.addEventListener("click",closeDrawer);
+$("drwX").addEventListener("click",closeDrawer);
+document.addEventListener("keydown",e=>{
+  if(!DRW.el.classList.contains("open")) return;
+  if(e.key==="Escape"){e.preventDefault();closeDrawer();return;}
+  if(e.key==="Tab"){
+    const f=[...DRW.el.querySelectorAll('button,summary,[href],[tabindex]:not([tabindex="-1"])')].filter(n=>n.offsetParent!==null);
+    if(!f.length) return; const a=f[0], z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus();}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}
+  }
+});
 $("resultBody").addEventListener("click",e=>{
+  const sm=e.target.closest(".see-more"); if(sm){const tr=sm.closest("tr");openDrawer(R.view[+tr.dataset.i],sm);return;}
   const rf=e.target.closest(".rf"); if(rf){R.rating=rf.dataset.rt;R.page=1;renderResult();return;}
   const pg=e.target.closest("[data-pg]"); if(pg&&!pg.disabled){R.page=+pg.dataset.pg;
     const r=resolve(); renderRows(r.src.length>1,R.rows.some(x=>x.det!==""),R.rows.some(x=>x.sc!==""));}
